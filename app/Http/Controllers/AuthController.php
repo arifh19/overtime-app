@@ -15,8 +15,8 @@ class AuthController extends Controller
         $name = $request->name;
         $username = $request->username;
         $password = $request->password;
-        $unit_id = $request->unit_id;
-        $user = User::create(['name' => $name, 'username' => $username, 'password' => Hash::make($password)]);
+        $departemen_id = $request->departemen_id;
+        $user = User::create(['name' => $name, 'username' => $username, 'password' => Hash::make($password), 'departemen_id' => $departemen_id]);
         $role = Role::where('id', $request->role)->first();
         $user->attachRole($role);
 
@@ -34,7 +34,7 @@ class AuthController extends Controller
         } catch (JWTException $e) {
             return response()->json(['success' => false, 'error' => 'Failed to login, please try again.'], 500);
         }
-        return response()->json(['success' => true, 'token' => $token,'expires_in' => auth()->factory()->getTTL() * 60]);
+        return response()->json(['success' => true, 'token' => $token,'expires_in' => auth()->factory()->getTTL() * 60,'role' => auth()->user()->roleUser->role->name]);
     }
 
     public function logout()

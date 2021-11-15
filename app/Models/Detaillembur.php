@@ -21,11 +21,11 @@ class Detaillembur extends Model
     }
     public function getReadableCreatedAt(){
       setlocale(LC_TIME, 'id_ID.UTF-8');
-      return Carbon::parse($this->attributes['created_at'])->formatLocalized('%H:%S %A, %d %B %Y');
-    }   
+      return Carbon::parse($this->attributes['created_at'])->formatLocalized('%H:%M %A, %d %B %Y');
+    }
   
     public function getReadableUpdatedAt(){
       setlocale(LC_TIME, 'id_ID.UTF-8');
-      return Carbon::parse($this->attributes['updated_at'])->formatLocalized('%H:%S %A, %d %B %Y');
-    }  
+      return Carbon::parse($this->attributes['updated_at'])->formatLocalized('%H:%M %A, %d %B %Y');
+    }
 }
