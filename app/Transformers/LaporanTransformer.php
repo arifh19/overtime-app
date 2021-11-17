@@ -34,7 +34,7 @@ class LaporanTransformer {
             'nama' => $data['nama'],
             'departemen' => $data->departemen['name'],
             'total_lembur' => $total_lembur.' Jam',
-            'total_biaya_lembur' => (int)$total_lembur * (int)$data->departemen['biaya_lembur'],
+            'total_biaya_lembur' => (float)$total_lembur * (float)$data->departemen['biaya_lembur'],
             'created_at' => $data->getReadableCreatedAt(),
             'updated_at' => $data->getReadableUpdatedAt(), 
         ];
@@ -58,7 +58,7 @@ class LaporanTransformer {
                 'nik' => $karyawan['nik'],
                 'nama' => $karyawan['nama'],
                 'total_lembur' => $total_lembur.' Jam',
-                'total_biaya_lembur' => (int)$total_lembur * (int)$karyawan->departemen['biaya_lembur'],
+                'total_biaya_lembur' => (float)$total_lembur * (float)$karyawan->departemen['biaya_lembur'],
                 'created_at' => $karyawan->getReadableCreatedAt(),
                 'updated_at' => $karyawan->getReadableUpdatedAt(), 
             ];

@@ -59,7 +59,7 @@ class DetaillemburController extends Controller
             'nik'   => 'required',
             'nama' => 'required',
             'waktu' => 'required',
-            'lama_lembur' => 'required',
+            'lama_lembur' => 'required|numeric',
             'lembur_id' => 'required',
         ]);
       
