@@ -58,9 +58,7 @@ class DetaillemburController extends Controller
         $validator = Validator::make($request->all(), [
             'nik'   => 'required',
             'nama' => 'required',
-            'mulai' => 'required',
-            'selesai' => 'required',
-            'keterangan' => 'required',
+            'waktu' => 'required',
             'lama_lembur' => 'required',
             'lembur_id' => 'required',
         ]);
@@ -78,9 +76,7 @@ class DetaillemburController extends Controller
         
         $this->detaillembur->nik = $request->nik;
         $this->detaillembur->nama = $request->nama;
-        $this->detaillembur->mulai = $request->mulai;
-        $this->detaillembur->selesai = $request->selesai;
-        $this->detaillembur->keterangan = $request->keterangan;
+        $this->detaillembur->waktu = $request->waktu;
         $this->detaillembur->departemen_id = auth()->user()->departemen_id;
         $this->detaillembur->lama_lembur = $request->lama_lembur;
         $this->detaillembur->lembur_id = $request->lembur_id;

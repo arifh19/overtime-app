@@ -71,10 +71,20 @@ class LemburController extends Controller
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
+        $validator = Validator::make($request->all(), [
+            'keterangan'   => 'required',
+        ]);
+        
+        //response error validation
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
         setlocale(LC_TIME, 'id_ID.UTF-8');
         $today = Carbon::parse(Carbon::now())->formatLocalized('%Y-%m-%d');
 
         $this->lembur->tanggal = $today;
+        $this->lembur->keterangan = $request->keterangan;
         $this->lembur->departemen_id = auth()->user()->departemen_id;
         $this->lembur->user_id = auth()->user()->id;
 

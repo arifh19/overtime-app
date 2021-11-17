@@ -29,6 +29,7 @@ class LemburTransformer extends Transformer {
             'id' => $data['id'],
             'tanggal' => Carbon::parse($data['tanggal'])->formatLocalized('%d %B %Y'),
             'departemen' => $data->departemen['name'],
+            'keterangan' => $data['keterangan'],
             'karyawan_lembur' => $karyawan,
             'created_at' => $data->getReadableCreatedAt(),
             'updated_at' => $data->getReadableUpdatedAt(), 

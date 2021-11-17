@@ -17,11 +17,11 @@ class CreateLembursTable extends Migration
             $table->increments('id');
             $table->string('tanggal');
             $table->unsignedInteger('departemen_id');
+            $table->string('keterangan');
             $table->unsignedInteger('user_id');
             $table->timestamps();
             $table->foreign('departemen_id')->references('id')->on('departemens')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-
         });
     }
 
