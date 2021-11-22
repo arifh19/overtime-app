@@ -17,7 +17,6 @@ class CreateDetaillembursTable extends Migration
             $table->increments('id');
             $table->string('nik');
             $table->string('nama');
-            $table->string('waktu');
             $table->float('lama_lembur');
             $table->unsignedInteger('departemen_id');
             $table->unsignedInteger('status_id');

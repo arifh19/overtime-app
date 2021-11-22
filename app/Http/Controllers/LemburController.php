@@ -31,11 +31,7 @@ class LemburController extends Controller
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        if (Laratrust::hasRole('Kepala departemen')) {
-            $lembur = $this->lemburTransformer->transformCollection($this->lembur
-                ->where('departemen_id',auth()->user()->departemen_id)
-                ->get());
-        }else if (Laratrust::hasRole('Kepala pabrik')) {
+        if (Laratrust::hasRole('Kepala pabrik')) {
             $lembur = $this->lemburTransformer->transformCollection($this->lembur->all());
         }else if (Laratrust::hasRole('Pengawas')){
             $lembur = $this->lemburTransformer->transformCollection($this->lembur
@@ -73,6 +69,8 @@ class LemburController extends Controller
 
         $validator = Validator::make($request->all(), [
             'keterangan'   => 'required',
+            'mulai' => 'required',
+            'selesai' => 'required',
         ]);
         
         //response error validation
@@ -85,6 +83,8 @@ class LemburController extends Controller
 
         $this->lembur->tanggal = $today;
         $this->lembur->keterangan = $request->keterangan;
+        $this->lembur->mulai = $request->mulai;
+        $this->lembur->selesai = $request->selesai;
         $this->lembur->departemen_id = auth()->user()->departemen_id;
         $this->lembur->user_id = auth()->user()->id;
 

@@ -58,7 +58,6 @@ class DetaillemburController extends Controller
         $validator = Validator::make($request->all(), [
             'nik'   => 'required',
             'nama' => 'required',
-            'waktu' => 'required',
             'lama_lembur' => 'required|numeric',
             'lembur_id' => 'required',
         ]);
@@ -76,7 +75,6 @@ class DetaillemburController extends Controller
         
         $this->detaillembur->nik = $request->nik;
         $this->detaillembur->nama = $request->nama;
-        $this->detaillembur->waktu = $request->waktu;
         $this->detaillembur->departemen_id = auth()->user()->departemen_id;
         $this->detaillembur->lama_lembur = $request->lama_lembur;
         $this->detaillembur->lembur_id = $request->lembur_id;
@@ -134,7 +132,7 @@ class DetaillemburController extends Controller
         if (!auth()->user()) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-        if (!(Laratrust::hasRole('Kepala departemen') || Laratrust::hasRole('Kepala pabrik'))) {
+        if (!(Laratrust::hasRole('Kepala pabrik'))) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
         $validator = Validator::make($request->all(), [
@@ -157,13 +155,8 @@ class DetaillemburController extends Controller
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        if (Laratrust::hasRole('Kepala departemen')) {
-            if($request->status == 3 || $karyawan->status_id != 1 || $request->status == 1 ){
-                return response()->json(['error' => 'Unauthorized'], 401);
-            }
-            $karyawan->status_id = $request->status;
-        }else if (Laratrust::hasRole('Kepala pabrik')){
-            if($request->status == 2 || $karyawan->status_id != 2 || $request->status == 1 ){
+        if (Laratrust::hasRole('Kepala pabrik')){
+            if($request->status == 1 || $karyawan->status_id != 1){
                 return response()->json(['error' => 'Unauthorized'], 401);
             }
             $karyawan->status_id = $request->status;

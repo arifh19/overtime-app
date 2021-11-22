@@ -18,9 +18,9 @@ class StatusSeeder extends Seeder
         $addStatus->status = "Diajukan";
         $addStatus->save();
 
-        $addStatus = new Status();
-        $addStatus->status = "Diterima oleh kadep";
-        $addStatus->save();
+        // $addStatus = new Status();
+        // $addStatus->status = "Diterima oleh kadep";
+        // $addStatus->save();
 
         $addStatus = new Status();
         $addStatus->status = "Diterima oleh factory head";

@@ -8,12 +8,8 @@ class LemburTransformer extends Transformer {
 
     public function transform($data)
     {
-        if (Laratrust::hasRole('Kepala departemen')) {
-            $karyawan = $data->detail_lembur()
-                ->where('status_id', 1)
-                ->get();
-        }else if (Laratrust::hasRole('Kepala pabrik')) {
-            $karyawan = $data->detail_lembur()->where('status_id', 2)->get();
+        if (Laratrust::hasRole('Kepala pabrik')) {
+            $karyawan = $data->detail_lembur()->where('status_id', 1)->get();
         }else if (Laratrust::hasRole('Pengawas')){
             $karyawan = $data->detail_lembur()->get();
         }else {
@@ -29,6 +25,8 @@ class LemburTransformer extends Transformer {
             'id' => $data['id'],
             'tanggal' => Carbon::parse($data['tanggal'])->formatLocalized('%d %B %Y'),
             'departemen' => $data->departemen['name'],
+            'mulai' => $data['mulai'],
+            'selesai' => $data['selesai'],
             'keterangan' => $data['keterangan'],
             'karyawan_lembur' => $karyawan,
             'created_at' => $data->getReadableCreatedAt(),

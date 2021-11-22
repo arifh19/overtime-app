@@ -8,14 +8,14 @@ class LaporanTransformer {
 
     public function transformCollection($items,$date)
     {
-        if (Laratrust::hasRole('Kepala departemen') || Laratrust::hasRole('Pengawas')) {  
+        if (Laratrust::hasRole('Pengawas')) {  
             return $items->map(function($item)use ($date){
                 $total_lembur = Detaillembur::where('departemen_id', $item['departemen_id'])
                     ->where('nik', $item['nik'])
-                    ->where('status_id', 3)
+                    ->where('status_id', 2)
                     ->where('tanggal', 'like', $date.'%')
                     ->groupBy('nik')->sum('lama_lembur');
-                return $this->transformDepartemen($item,$total_lembur);
+                return $this->transformPengawas($item,$total_lembur);
             })->unique('nik')->values();
         }else if (Laratrust::hasRole('Kepala pabrik')) {
             return $items->map(function($item)use ($date){
@@ -26,7 +26,7 @@ class LaporanTransformer {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
     }
-    public function transformDepartemen($data,$total_lembur)
+    public function transformPengawas($data,$total_lembur)
     {
         return [
             'id' => $data['id'],
@@ -42,14 +42,14 @@ class LaporanTransformer {
     public function transformAll($data,$date)
     {
         $karyawans = $data->detail_lembur()
-        ->where('status_id', 3)
+        ->where('status_id', 2)
         ->where('tanggal', 'like', $date.'%')
         ->get();
 
         $datakaryawan = $karyawans->map(function($karyawan)use ($date){
             $total_lembur = Detaillembur::where('departemen_id', $karyawan['departemen_id'])
                     ->where('nik', $karyawan['nik'])
-                    ->where('status_id', 3)
+                    ->where('status_id', 2)
                     ->where('tanggal', 'like', $date.'%')
                     ->groupBy('nik')->sum('lama_lembur');
 

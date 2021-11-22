@@ -19,9 +19,9 @@ class UserSeeder extends Seeder
         $pengawas->name = "Pengawas";
         $pengawas->save();
 
-        $kepdep = new Role();
-        $kepdep->name = "Kepala departemen";
-        $kepdep->save();
+        // $kepdep = new Role();
+        // $kepdep->name = "Kepala departemen";
+        // $kepdep->save();
 
         $keppab = new Role();
         $keppab->name = "Kepala pabrik";
@@ -36,13 +36,13 @@ class UserSeeder extends Seeder
         $user->save();
         $user->attachRole($pengawas);
 
-        $user = new User();
-        $user->name = 'Kepala departemen Graphic';
-        $user->username = 'kepdep1';
-        $user->password = bcrypt('rahasia');
-        $user->departemen_id = 2; //Graphic
-        $user->save();
-        $user->attachRole($kepdep);
+        // $user = new User();
+        // $user->name = 'Kepala departemen Graphic';
+        // $user->username = 'kepdep1';
+        // $user->password = bcrypt('rahasia');
+        // $user->departemen_id = 2; //Graphic
+        // $user->save();
+        // $user->attachRole($kepdep);
 
         //Add user for printing department
         $user = new User();
@@ -53,13 +53,13 @@ class UserSeeder extends Seeder
         $user->save();
         $user->attachRole($pengawas);
 
-        $user = new User();
-        $user->name = 'Kepala departemen Printing';
-        $user->username = 'kepdep2';
-        $user->password = bcrypt('rahasia');
-        $user->departemen_id = 3; //printing
-        $user->save();
-        $user->attachRole($kepdep);
+        // $user = new User();
+        // $user->name = 'Kepala departemen Printing';
+        // $user->username = 'kepdep2';
+        // $user->password = bcrypt('rahasia');
+        // $user->departemen_id = 3; //printing
+        // $user->save();
+        // $user->attachRole($kepdep);
 
         //add user for head factory
         $user = new User();

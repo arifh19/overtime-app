@@ -41,9 +41,9 @@ class LaporanController extends Controller
         if (!auth()->user()) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-        if (Laratrust::hasRole('Kepala departemen') || Laratrust::hasRole('Pengawas')) {
+        if (Laratrust::hasRole('Pengawas')) {
             $laporans = $this->laporanTransformer->transformCollection(Detaillembur::where('departemen_id', auth()->user()->departemen_id)
-                ->where('status_id', 3)
+                ->where('status_id', 2)
                 ->where('tanggal', 'like', $date.'%')
                 ->get(), $date);
         }else if (Laratrust::hasRole('Kepala pabrik')) {
